@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD MOBILITY CAR RENTAL L.L.C Premium | Luxury Car Rental Dubai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* TEMPORARY STYLES while main CSS loads */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        button, .btn {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+    <i class="fas fa-car car-icon"></i>
+    <i class="fas fa-truck car-icon"></i>
+    <i class="fas fa-motorcycle car-icon"></i>
+    <i class="fas fa-shuttle-van car-icon"></i>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-car"></i>
+                <span>NOMAD MOBILITY CAR RENTAL L.L.C</span>
+                <span class="logo-premium">RENTAL</span>
+            </div>
+
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="#catalog" class="nav-link"><i class="fas fa-car"></i> Catalog</a>
+                <a href="#contacts" class="nav-link"><i class="fas fa-phone"></i> Contacts</a>
+            </div>
+            
+            <div class="nav-actions">
+                <!-- WhatsApp button in menu -->
+                <a href="https://wa.me/971502571234?text=Hello!%20I'm%20interested%20in%20renting%20a%20car%20from%20Nomad%20Mobility" 
+                   class="nav-action-btn whatsapp-btn" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                
+                <!-- Telegram button in menu -->
+                <button class="nav-action-btn" id="telegramBtn" title="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </button>
+                
+                <button class="nav-action-btn" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <button class="nav-action-btn" id="languageBtn" title="Select language">
+                    <i class="fas fa-globe"></i>
+                    <span class="current-lang">EN</span>
+                </button>
+                
+                <button class="nav-action-btn" id="favoritesBtn">
+                    <i class="fas fa-heart"></i>
+                    <span class="action-badge" id="favCount">0</span>
+                </button>
+                <button class="nav-action-btn" id="searchToggle">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="search-panel hidden" id="searchPanel">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="globalSearch" placeholder="Search by name...">
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="language-modal hidden" id="languageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-globe"></i> Select Language</h3>
+
+<button class="modal-close">&times;</button>
+            </div>
+            <div class="languages-list">
+                <button class="language-option" data-lang="en">
+                    <span class="flag">🇬🇧</span>
+                    <span class="lang-name">English</span>
+                    <span class="lang-code">EN</span>
+                </button>
+                
+                <button class="language-option" data-lang="ar">
+                    <span class="flag">🇸🇦</span>
+                    <span class="lang-name">العربية</span>
+                    <span class="lang-code">AR</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div class="modal hidden" id="consultationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-comments"></i> Request Consultation</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="consultationFormModal">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="service" required>
+                            <option value="">Select Service</option>
+                            <option value="test_drive">Test Drive</option>
+                            <option value="rent">Car Rental</option>
+                            <option value="long_term">Long Term Rental</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your question or comment" name="message" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Telegram Modal -->
+    <div class="modal hidden" id="telegramModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fab fa-telegram"></i> Our Telegram</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Join our Telegram channel for latest offers and consultations:</p>
+                <div class="telegram-links">
+                    <a href="https://t.me/your_telegram_channel" class="telegram-link-btn" target="_blank">
+                        <i class="fab fa-telegram"></i> Join Channel
+                    </a>
+                    <a href="https://t.me/your_telegram_contact" class="telegram-link-btn" target="_blank">
+                        <i class="fab fa-telegram"></i> Send Message
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rental Modal -->
+    <div class="modal hidden" id="rentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-alt"></i> Car Rental</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+
+<form id="rentFormModal">
+                    <input type="hidden" id="rentCarName" name="car_name">
+                    <input type="hidden" id="rentCarPrice" name="car_price">
+                    
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Rental Start Date:</label>
+                        <input type="date" name="start_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Rental End Date:</label>
+                        <input type="date" name="end_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Rental Period:</label>
+                        <select name="rent_period" id="rentPeriod" required>
+                            <option value="">Select Period</option>
+                            <option value="1_day">1 Day</option>
+                            <option value="3_days">3 Days</option>
+                            <option value="1_week">1 Week</option>
+                            <option value="2_weeks">2 Weeks</option>
+                            <option value="1_month">1 Month</option>
+                            <option value="custom">Custom Period</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Extra Options:</label>
+                        <div class="checkboxes">
+                            <label><input type="checkbox" name="insurance"> Full Insurance</label>
+                            <label><input type="checkbox" name="delivery"> Car Delivery</label>
+                            <label><input type="checkbox" name="child_seat"> Child Seat</label>
+                            <label><input type="checkbox" name="gps"> GPS Navigator</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea placeholder="Additional wishes or comments" name="message" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="rent-summary">
+                        <h4>Total: <span id="totalPrice">$0</span></h4>
+                        <p class="price-note" id="priceNote"></p>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-car"></i> Book Rental
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="images/photo_2025-12-28_13-32-45.jpg" alt="NOMAD MOBILITY">
+            </div>
+            <h1 class="hero-title">Luxury Car Rental in Dubai</h1>
+            <a href="#catalog" class="hero-btn">View Catalog</a>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <i class="fas fa-car"></i>
+                <div>
+                    <h3>6</h3>
+                    <p>Premium Cars</p>
+                </div>
+            </div>
+            <div class="stat-item">
+
+<i class="fas fa-star"></i>
+                <div>
+                    <h3>4.9</h3>
+                    <p>Average Rating</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-calendar-check"></i>
+                <div>
+                    <h3>24/7</h3>
+                    <p>Availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+        <div class="section-header">
+            <h2><i class="fas fa-calendar-alt"></i> Cars for Rent</h2>
+            <p>Premium cars for rent in Dubai</p>
+            <!-- Catalog buttons -->
+            <div class="catalog-buttons">
+                <button class="consultation-catalog-btn" id="consultationCatalogBtn">
+                    <i class="fas fa-comments"></i> Get Consultation
+                </button>
+                <button class="rent-catalog-btn" id="rentCatalogBtn">
+                    <i class="fas fa-calendar-alt"></i> Rental Terms
+                </button>
+            </div>
+        </div>
+
+        <div class="filters-panel">
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label><i class="fas fa-search"></i> Search:</label>
+                    <input type="text" id="searchInput" placeholder="Enter name...">
+                </div>
+                
+                <div class="filter-item">
+                    <label><i class="fas fa-sort-amount-down"></i> Sort:</label>
+                    <select id="sortSelect">
+                        <option value="default">Default</option>
+                        <option value="price_asc">Price ↑</option>
+                        <option value="price_desc">Price ↓</option>
+                        <option value="year_asc">Year ↑</option>
+                        <option value="year_desc">Year ↓</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="view-controls">
+                <button class="view-btn active" data-view="grid">
+                    <i class="fas fa-th-large"></i> Grid
+                </button>
+                <button class="view-btn" data-view="list">
+                    <i class="fas fa-list"></i> List
+                </button>
+            </div>
+        </div>
+
+        <div class="results-info">
+            <div class="results-count">
+                <i class="fas fa-search"></i>
+                <span>Found: <strong id="resultsCount">6</strong> cars</span>
+            </div>
+        </div>
+
+        <div class="cars-container grid-view" id="carsContainer">
+            <!-- Cars will be loaded via JS -->
+        </div>
+    </section>
+
+    <section class="favorites-section" id="favoritesSection">
+        <div class="section-header">
+            <h2><i class="fas fa-heart"></i> Favorites</h2>
+            <p>Your selected cars</p>
+        </div>
+        
+        <div class="favorites-container" id="favoritesContainer">
+            <!-- Favorite cars will be loaded via JS -->
+        </div>
+    </section>
+
+    <section class="contacts-section" id="contacts">
+        <div class="section-header">
+            <h2><i class="fas fa-phone"></i> Contacts</h2>
+            <p>Contact us</p>
+        </div>
+        
+        <div class="contacts-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>Dubai, UAE</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+
+<h4>Phone</h4>
+                        <p>+971 50 257 1234</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Working Hours</h4>
+                        <p>24/7</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Request a Call</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number" name="phone" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-phone"></i> Request Call
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-car"></i>
+                    <span>NOMAD MOBILITY CAR RENTAL L.L.C</span>
+                </div>
+                <p>Luxury car rental in Dubai</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 NOMAD MOBILITY CAR RENTAL L.L.C Premium. Luxury car rental.</p>
+        </div>
+    </footer>
+
+    <div class="widgets">
+        <button class="widget-btn scroll-top hidden" id="scrollTop">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD MOBILITY CAR RENTAL L.L.C Premium | Продажа премиальных автомобилей</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ВРЕМЕННЫЕ СТИЛИ пока грузится основной CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        button, .btn {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+    <i class="fas fa-car car-icon"></i>
+    <i class="fas fa-truck car-icon"></i>
+    <i class="fas fa-motorcycle car-icon"></i>
+    <i class="fas fa-shuttle-van car-icon"></i>
+
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-car"></i>
+                <span>NOMAD MOBILITY CAR RENTAL L.L.C</span>
+                <span class="logo-premium">PREMIUM</span>
+            </div>
+            
+
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Главная</a>
+                <a href="#catalog" class="nav-link"><i class="fas fa-car"></i> Каталог</a>
+                <a href="#contacts" class="nav-link"><i class="fas fa-phone"></i> Контакты</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="nav-action-btn" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+
+                <button class="nav-action-btn" id="languageBtn" title="Выбрать язык">
+                    <i class="fas fa-globe"></i>
+                    <span class="current-lang">RU</span>
+                </button>
+                
+                <button class="nav-action-btn" id="favoritesBtn">
+                    <i class="fas fa-heart"></i>
+                    <span class="action-badge" id="favCount">0</span>
+                </button>
+                <button class="nav-action-btn" id="searchToggle">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+
+        <div class="search-panel hidden" id="searchPanel">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="globalSearch" placeholder="Поиск по названию...">
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="language-modal hidden" id="languageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-globe"></i> Выберите язык</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="languages-list">
+                <button class="language-option" data-lang="ru">
+                    <span class="flag">🇷🇺</span>
+                    <span class="lang-name">Русский</span>
+
+<span class="lang-code">RU</span>
+                </button>
+                
+                <button class="language-option" data-lang="en">
+                    <span class="flag">🇬🇧</span>
+                    <span class="lang-name">English</span>
+                    <span class="lang-code">EN</span>
+                </button>
+                
+                <button class="language-option" data-lang="ar">
+                    <span class="flag">🇸🇦</span>
+                    <span class="lang-name">العربية</span>
+                    <span class="lang-code">AR</span>
+                </button>
+                
+                <button class="language-option" data-lang="zh">
+                    <span class="flag">🇨🇳</span>
+                    <span class="lang-name">中文</span>
+                    <span class="lang-code">ZH</span>
+                </button>
+                
+                <button class="language-option" data-lang="hi">
+                    <span class="flag">🇮🇳</span>
+                    <span class="lang-name">हिन्दी</span>
+                    <span class="lang-code">HI</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="images/photo_2025-12-28_13-32-45.jpg" alt="AutoLux Premium">
+            </div>
+            <h1 class="hero-title">Только твои премиальные автомобили</h1>
+            <p class="hero-subtitle">Mercedes-Benz S-Class и BMW X6 M Competition</p>
+            <a href="#catalog" class="hero-btn">Смотреть каталог</a>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <i class="fas fa-car"></i>
+                <div>
+                    <h3>2</h3>
+                    <p>Эксклюзивных авто</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <div>
+                    <h3>4.9</h3>
+                    <p>Средний рейтинг</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <h3>100%</h3>
+                    <p>Гарантия качества</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="catalog-section" id="catalog">
+        <div class="section-header">
+            <h2><i class="fas fa-car"></i> Наш каталог</h2>
+            <p>Два эксклюзивных автомобиля в наличии</p>
+        </div>
+        
+
+        <div class="filters-panel">
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label><i class="fas fa-search"></i> Поиск:</label>
+                    <input type="text" id="searchInput" placeholder="Введите название...">
+                </div>
+                
+                <div class="filter-item">
+                    <label><i class="fas fa-sort-amount-down"></i> Сортировка:</label>
+                    <select id="sortSelect">
+                        <option value="default">По умолчанию</option>
+                        <option value="price_asc">Цена ↑</option>
+                        <option value="price_desc">Цена ↓</option>
+                        <option value="year_asc">Год ↑</option>
+                        <option value="year_desc">Год ↓</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="view-controls">
+                <button class="view-btn active" data-view="grid">
+                    <i class="fas fa-th-large"></i> Сетка
+                </button>
+
+<button class="view-btn" data-view="list">
+                    <i class="fas fa-list"></i> Список
+                </button>
+            </div>
+        </div>
+        
+
+        <div class="results-info">
+            <div class="results-count">
+                <i class="fas fa-search"></i>
+                <span>Найдено: <strong id="resultsCount">2</strong> автомобилей</span>
+            </div>
+        </div>
+        
+
+        <div class="cars-container grid-view" id="carsContainer">
+
+        </div>
+    </section>
+
+
+    <section class="favorites-section" id="favoritesSection">
+        <div class="section-header">
+            <h2><i class="fas fa-heart"></i> Избранное</h2>
+            <p>Выбранные вами автомобили</p>
+        </div>
+        
+        <div class="favorites-container" id="favoritesContainer">
+
+        </div>
+    </section>
+
+
+    <section class="contacts-section" id="contacts">
+        <div class="section-header">
+            <h2><i class="fas fa-phone"></i> Контакты</h2>
+            <p>Свяжитесь с нами</p>
+        </div>
+        
+        <div class="contacts-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Адрес</h4>
+                        <p>г. Дубай</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Телефон</h4>
+                        <p>+971 50 257 1234</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Часы работы</h4>
+                        <p>24/7</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Заказать звонок</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Телефон" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-phone"></i> Заказать звонок
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-car"></i>
+                    <span>NOMAD MOBILITY CAR RENTAL L.L.C Premium</span>
+                </div>
+                <p>Продажа твоих эксклюзивных автомобилей</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 NOMAD MOBILITY CAR RENTAL L.L.C Premium. Только твои автомобили.</p>
+        </div>
+    </footer>
+
+
+    <div class="widgets">
+        <button class="widget-btn telegram-widget" id="telegramBtn">
+            <i class="fab fa-telegram"></i>
+        </button>
+        <button class="widget-btn scroll-top hidden" id="scrollTop">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>  -->
+
